@@ -16,7 +16,21 @@ router.get('/', (req, res, next) => {
 
 // `[POST] /api/projects`
 router.post('/', (req, res, next) => {
-
+  const { project_name, project_description, project_completed} = req.body
+  if (!project_name) {
+    res.status(400).json({
+      message: "missing project name"
+    })
+  } else {
+    Projects.add({project_name, project_description, project_completed})
+      .then(({project_id}) => {
+        return Projects.findById(project_id)
+      })
+      .then(project => {
+        res.status(201).json(project)
+      })
+      .catch(next)
+  }
 })
 
 router.use((err, req, res, next) => { // eslint-disable-line
