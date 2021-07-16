@@ -2,11 +2,11 @@
 const db = require('./../../data/dbConfig')
 
 function find() {
-  return db('resources as r')
+  return db('projects as p')
 }
 
-function add(resource) {
-  return db('resources').insert(resource)
+function add(project) {
+  return db('projects').insert(project)
 }
 
 module.exports = {find, add}

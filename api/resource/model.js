@@ -9,3 +9,5 @@ function find() {
 function add(resource) {
   return db('resources').insert(resource)
 }
+
+module.exports = {find, add}
