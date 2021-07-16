@@ -21,11 +21,24 @@ exports.up = async function(knex) {
         .notNullable()
         .references('project_id')
         .inTable('projects')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
+    })
+    .createTable('project_resources', table => {
+      table.increments('p_r_id')
+      table.integer('list_id')
+      table.integer('project_id')
+        .references('project_id')
+        .inTable('projects')
+      table.integer('resources_id')
+        .references('resource_id')
+        .inTable('resources')
     })
 };
 
 exports.down = async function(knex) {
   await knex.schema
+    .dropTableIfExists('project_resources')
     .dropTableIfExists('tasks')
     .dropTableIfExists('resources')
     .dropTableIfExists('projects')
