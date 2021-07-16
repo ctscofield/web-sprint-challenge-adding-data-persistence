@@ -6,9 +6,9 @@
     "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand --silent",
     "start": "node index.js",
     "server": "nodemon index.js",
-    "migrate": "npx knex migrate:run",
-    "up": "npx knex migrate:up",
-    "rollback": "npx knex migrate:down"
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run",
+    "rollback": "knex migrate:rollback"
   },
   "repository": {
     "type": "git",
